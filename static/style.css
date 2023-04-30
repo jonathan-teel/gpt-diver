@@ -1,0 +1,133 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f0f0;
+    background-image: linear-gradient(180deg, #f0f0f0, #e0e0e0);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    font-size: 18px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+input[type="password"],
+input[type="text"],
+textarea {
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="password"]:focus,
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #1d8cf8;
+    box-shadow: 0 0 5px rgba(29, 140, 248, 0.3);
+}
+
+input[type="password"]:hover,
+input[type="text"]:hover,
+textarea:hover {
+    border-color: #999;
+}
+
+button {
+    background-color: #1d8cf8;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #1b80d6;
+    transform: translateY(-2px);
+}
+
+button:disabled {
+    background-color: #bbb;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.thoughts-wrapper {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.response-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.response-header h2 {
+    font-weight: 500;
+    font-size: 24px;
+    color: #1d8cf8;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 2s linear infinite;
+    margin: auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+select {
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    appearance: auto;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+select:focus {
+    border-color: #1d8cf8;
+    box-shadow: 0 0 5px rgba(29, 140, 248, 0.3);
+}
+
+select:hover {
+    border-color: #999;
+}
