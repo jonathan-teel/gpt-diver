@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GPT-Diver</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
     <div class="container">
@@ -21,256 +21,139 @@
                 <option value="true" selected>Use System Message</option>
                 <option value="false">Do Not System Message</option>
             </select>
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="temperature" class="form-label">Temperature (min=0 max=2)</label>
+                    <input type="number" class="form-control" id="temperature" value="1" step="0.1" min="0" max="2">
+                    <a href="https://platform.openai.com/docs/api-reference/chat/create#chat/create-temperature" target="_blank">Info</a>
+                </div>
+                <div class="input-group">
+                    <label for="top_p" class="form-label">Top_p (min=0 max=1)</label>
+                    <input type="number" class="form-control" id="top_p" value="1" step="0.1" min="0" max="1">
+                    <a href="https://platform.openai.com/docs/api-reference/chat/create#chat/create-top_p" target="_blank">Info</a>
+                </div>
+            </div>
             <label for="query" class="form-label">Say Something:</label>
             <textarea id="query" name="query" class="form-control" rows="4"></textarea>
-            <button type="button" id="runBtn" class="btn btn-primary">Reveal</button>
+            <button type="button" id="runBtn" class="btn btn-primary">Dive In</button>
         </div>
 
-        <div class="thoughts-wrapper">
+        <div class="thoughts-wrapper grid-container">
             <div class="spinner" id="thoughts-spinner"></div>
+            <div class="section">
+                <div class="response-header">
+                    <h2>GPT Answer</h2>
+                    <button type="button" id="runAnswerBtn" class="btn btn-primary">Add And Rerun</button>
+                </div>
+                <p id="answer"></p>
+            </div>
+        
+            <div class="section">
+                <div class="response-header">
+                    <h2>GPT Analysis</h2>
+                    <button type="button" id="runAnalysisBtn" class="btn btn-primary">Add And Rerun</button>
+                </div>
+                <p id="analysis"></p>
+            </div>
+        
+            <div class="section">
+                <div class="response-header">
+                    <h2>GPT Interpretation</h2>
+                    <button type="button" id="runInterpretationBtn" class="btn btn-primary">Add And Rerun</button>
+                </div>
+                <p id="interpretation"></p>
+            </div>
+        
+            <div class="section">
+                <div class="response-header">
+                    <h2>GPT Emotional Analysis</h2>
+                    <button type="button" id="runEABtn" class="btn btn-primary">Add And Rerun</button>
+                </div>
+                <p id="emotional-analysis"></p>
+            </div>
+        
+            <div class="section">
+                <div class="response-header">
+                    <h2>GPT Suggestions</h2>
+                    <button type="button" id="runSuggestionsBtn" class="btn btn-primary">Add And Rerun</button>
+                </div>
+                <p id="suggestions"></p>
+            </div>
+        
+            <div class="section">
+                <div class="response-header">
+                    <h2>GPT Thoughts</h2>
+                    <button type="button" id="runThoughtsBtn" class="btn btn-primary">Add And Rerun</button>
+                </div>
+                <p id="thoughts"></p>
+            </div>
+        
+            <div class="section">
+                <div class="response-header">
+                    <h2>GPT Summarization</h2>
+                    <button type="button" id="runSummarizationBtn" class="btn btn-primary">Add And Rerun</button>
+                </div>
+                <p id="summarization"></p>
+            </div>
+        
+            <div class="section">
+                <div class="response-header">
+                    <h2>GPT Intent Detection</h2>
+                    <button type="button" id="runIntentDetectionBtn" class="btn btn-primary">Add And Rerun</button>
+                </div>
+                <p id="intent-detection"></p>
+            </div>
+        
+            <div class="section">
+                <div class="response-header">
+                    <h2>GPT Keywords Extraction</h2>
+                    <button type="button" id="runKeywordsExtractionBtn" class="btn btn-primary">Add And Rerun</button>
+                </div>
+                <p id="keywords-extraction"></p>
+            </div>
+        
+            <div class="section">
+                <div class="response-header">
+                    <h2>GPT Sentiment Analysis</h2>
+                    <button type="button" id="runSentimentAnalysisBtn" class="btn btn-primary">Add And Rerun</button>
+                </div>
+                <p id="sentiment-analysis"></p>
+            </div>
+        
+            <div class="section">
+                <div class="response-header">
+                    <h2>GPT Context Analysis</h2>
+                    <button type="button" id="runContextAnalysisBtn" class="btn btn-primary">Add And Rerun</button>
+                </div>
+                <p id="context-analysis"></p>
+            </div>
+            
+            <div class="section">
+                <div class="response-header">
+                    <h2>GPT Anomaly Detection</h2>
+                    <button type="button" id="runAnomalyDetectionBtn" class="btn btn-primary">Add And Rerun</button>
+                </div>
+                <p id="anomaly-detection"></p>
+            </div>
+            
+            <div class="section">
+                <div class="response-header">
+                    <h2>GPT Personalization</h2>
+                    <button type="button" id="runPersonalizationBtn" class="btn btn-primary">Add And Rerun</button>
+                </div>
+                <p id="personalization"></p>
+            </div>
+            
+            <div class="section">
+                <div class="response-header">
+                    <h2>GPT Response Variations</h2>
+                    <button type="button" id="runResponseVariationsBtn" class="btn btn-primary">Add And Rerun</button>
+                </div>
+                <p id="response-variations"></p>
+            </div>
 
-            <div class="response-header">
-                <h2>GPT Answer</h2>
-                <button type="button" id="runAnswerBtn" class="btn btn-primary">Rerun</button>
-            </div>
-            <p id="answer"></p>
-            
-            <div class="response-header">
-                <h2>GPT Analysis</h2>
-                <button type="button" id="runAnalysisBtn" class="btn btn-primary">Rerun</button>
-            </div>
-            <p id="analysis"></p>
-            
-            <div class="response-header">
-                <h2>GPT Interpretation</h2>
-                <button type="button" id="runInterpretationBtn" class="btn btn-primary">Rerun</button>
-            </div>
-            <p id="interpretation"></p>
-            
-            <div class="response-header">
-                <h2>GPT Emotional Analysis</h2>
-                <button type="button" id="runEABtn" class="btn btn-primary">Rerun</button>
-            </div>
-            <p id="emotional-analysis"></p>
-            
-            <div class="response-header">
-                <h2>GPT Suggestions</h2>
-                <button type="button" id="runSuggestionsBtn" class="btn btn-primary">Rerun</button>
-            </div>
-            <p id="suggestions"></p>
-            
-            <div class="response-header">
-                <h2>GPT Thoughts</h2>
-                <button type="button" id="runThoughtsBtn" class="btn btn-primary">Rerun</button>
-            </div>
-            <p id="thoughts"></p>
-            
-            <div class="response-header">
-                <h2>GPT Summarization</h2>
-                <button type="button" id="runSummarizationBtn" class="btn btn-primary">Rerun</button>
-            </div>
-            <p id="summarization"></p>
-            
-            <div class="response-header">
-                <h2>GPT Intent Detection</h2>
-                <button type="button" id="runIntentDetectionBtn" class="btn btn-primary">Rerun</button>
-            </div>
-            <p id="intent-detection"></p>
-            
-            <div class="response-header">
-                <h2>GPT Keywords Extraction</h2>
-                <button type="button" id="runKeywordsExtractionBtn" class="btn btn-primary">Rerun</button>
-            </div>
-            <p id="keywords-extraction"></p>
-            
-            <div class="response-header">
-                <h2>GPT Sentiment Analysis</h2>
-                <button type="button" id="runSentimentAnalysisBtn" class="btn btn-primary">Rerun</button>
-            </div>
-            <p id="sentiment-analysis"></p>
-            
-            <div class="response-header">
-                <h2>GPT Context Analysis</h2>
-                <button type="button" id="runContextAnalysisBtn" class="btn btn-primary">Rerun</button>
-            </div>
-            <p id="context-analysis"></p>
-            
-            <div class="response-header">
-                <h2>GPT Anomaly Detection</h2>
-                <button type="button" id="runAnomalyDetectionBtn" class="btn btn-primary">Rerun</button>
-            </div>
-            <p id="anomaly-detection"></p>
-            
-            <div class="response-header">
-                <h2>GPT Personalization</h2>
-                <button type="button" id="runPersonalizationBtn" class="btn btn-primary">Rerun</button>
-            </div>
-            <p id="personalization"></p>
-
-            <div class="response-header">
-                <h2>GPT Response Variations</h2>
-                <button type="button" id="runResponseVariationsBtn" class="btn btn-primary">Rerun</button>
-            </div>
-            <p id="response-variations"></p>     
-        </div>
+        </div>                 
     </div> 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            var answer = document.getElementById('answer');
-            var analysis = document.getElementById('analysis');
-            var interpretation = document.getElementById('interpretation');
-            var emotionalAnalysis = document.getElementById('emotional-analysis');
-            var suggestions = document.getElementById('suggestions');
-            var thoughts = document.getElementById('thoughts');
-            var summarization = document.getElementById('summarization');
-            var intentDetection = document.getElementById('intent-detection');
-            var keywordsExtraction = document.getElementById('keywords-extraction');
-            var sentimentAnalysis = document.getElementById('sentiment-analysis');
-            var contextAnalysis = document.getElementById('context-analysis');
-            var anomalyDetection = document.getElementById('anomaly-detection');
-            var personalization = document.getElementById('personalization');
-            var responseVariations = document.getElementById('response-variations');
-            var runBtn = document.getElementById('runBtn');
-            var thoughtsSpinner = document.getElementById('thoughts-spinner');
-            thoughtsSpinner.style.display = 'none';
-            var originalQuery = '';
-            var queryHistory = '';
-
-            runBtn.addEventListener('click', async (event) => {
-                originalQuery = document.getElementById('query').value;
-                queryHistory = '';
-                generateAnalysis();
-            });
-
-            document.getElementById('runAnswerBtn').addEventListener('click', async (event) => {
-                queryHistory += `Assistant: ${answer.textContent}\n`;
-                resubmitQuery(queryHistory + '\nUser: ' + originalQuery);
-            });
-
-            document.getElementById('runAnalysisBtn').addEventListener('click', async (event) => {
-                queryHistory += `Assistant: ${analysis.textContent}\n`;
-                resubmitQuery(queryHistory + '\nUser: ' + originalQuery);
-            });
-
-            document.getElementById('runEABtn').addEventListener('click', async (event) => {
-                queryHistory += `Assistant: ${emotionalAnalysis.textContent}\n`;
-                resubmitQuery(queryHistory + '\nUser: ' + originalQuery);
-            });
-
-            document.getElementById('runInterpretationBtn').addEventListener('click', async (event) => {
-                queryHistory += `Assistant: ${interpretation.textContent}\n`;
-                resubmitQuery(queryHistory + '\nUser: ' + originalQuery);
-            });
-
-            document.getElementById('runSuggestionsBtn').addEventListener('click', async (event) => {
-                queryHistory += `Assistant: ${suggestions.textContent}\n`;
-                resubmitQuery(queryHistory + '\nUser: ' + originalQuery);
-            });
-
-            document.getElementById('runThoughtsBtn').addEventListener('click', async (event) => {
-                queryHistory += `Assistant: ${thoughts.textContent}\n`;
-                resubmitQuery(queryHistory + '\nUser: ' + originalQuery);
-            });
-
-            document.getElementById('runSummarizationBtn').addEventListener('click', async (event) => {
-                queryHistory += `Assistant: ${summarization.textContent}\n`;
-                resubmitQuery(queryHistory + '\nUser: ' + originalQuery);
-            });
-
-            document.getElementById('runIntentDetectionBtn').addEventListener('click', async (event) => {
-                queryHistory += `Assistant: ${intentDetection.textContent}\n`;
-                resubmitQuery(queryHistory + '\nUser: ' + originalQuery);
-            });
-
-            document.getElementById('runKeywordsExtractionBtn').addEventListener('click', async (event) => {
-                queryHistory += `Assistant: ${keywordsExtraction.textContent}\n`;
-                resubmitQuery(queryHistory + '\nUser: ' + originalQuery);
-            });
-
-            document.getElementById('runSentimentAnalysisBtn').addEventListener('click', async (event) => {
-                queryHistory += `Assistant: ${sentimentAnalysis.textContent}\n`;
-                resubmitQuery(queryHistory + '\nUser: ' + originalQuery);
-            });
-
-            document.getElementById('runContextAnalysisBtn').addEventListener('click', async (event) => {
-                queryHistory += `Assistant: ${contextAnalysis.textContent}\n`;
-                resubmitQuery(queryHistory + '\nUser: ' + originalQuery);
-            });
-
-            document.getElementById('runAnomalyDetectionBtn').addEventListener('click', async (event) => {
-                queryHistory += `Assistant: ${anomalyDetection.textContent}\n`;
-                resubmitQuery(queryHistory + '\nUser: ' + originalQuery);
-            });
-
-            document.getElementById('runPersonalizationBtn').addEventListener('click', async (event) => {
-                queryHistory += `Assistant: ${personalization.textContent}\n`;
-                resubmitQuery(queryHistory + '\nUser: ' + originalQuery);
-            });
-
-            document.getElementById('runResponseVariationsBtn').addEventListener('click', async (event) => {
-                queryHistory += `Assistant: ${responseVariations.textContent}\n`;
-                resubmitQuery(queryHistory + '\nUser: ' + originalQuery);
-            });
-
-            async function generateAnalysis() {
-                clearFields();
-                runBtn.disabled = true;
-                runBtn.innerText = 'Running...';
-                thoughtsSpinner.style.display = 'block';
-
-                var apiKey = document.getElementById('apiKey').value;
-                var query = document.getElementById('query').value;
-                var model = document.getElementById('modelSelect').value;
-                var useSystemMsg = document.getElementById('systemMsg').value;
-                var response = await fetch('/generate-analysis', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                    body: `query=${encodeURIComponent(query)}&api_key=${encodeURIComponent(apiKey)}&model=${encodeURIComponent(model)}&sm=${encodeURIComponent(useSystemMsg)}`
-                });
-
-                var result = await response.json();
-                answer.textContent = result.answer;
-                interpretation.textContent = result.interpretation;
-                emotionalAnalysis.textContent = result.emotional_analysis;
-                thoughts.textContent = result.thoughts;
-                suggestions.textContent = result.suggestions;
-                analysis.textContent = result.analysis;
-                summarization.textContent = result.summarization;
-                intentDetection.textContent = result.intent_detection;
-                keywordsExtraction.textContent = result.keywords_extraction;
-                sentimentAnalysis.textContent = result.sentiment_analysis;
-                contextAnalysis.textContent = result.context_analysis;
-                anomalyDetection.textContent = result.anomaly_detection;
-                personalization.textContent = result.personalization;
-                responseVariations.textContent = result.response_variations;
-                thoughtsSpinner.style.display = 'none';
-                
-                runBtn.disabled = false;
-                runBtn.innerText = 'Run';
-            }
-
-            async function resubmitQuery(newQuery) {
-                document.getElementById('query').value = newQuery;
-                generateAnalysis();
-            }
-
-            function clearFields() {
-                answer.textContent = '';
-                analysis.textContent = '';
-                interpretation.textContent = '';
-                emotionalAnalysis.textContent = '';
-                thoughts.textContent = '';
-                suggestions.textContent = '';
-                summarization.textContent = '';
-                intentDetection.textContent = '';
-                keywordsExtraction.textContent = '';
-                sentimentAnalysis.textContent = '';
-                contextAnalysis.textContent = '';
-                anomalyDetection.textContent = '';
-                personalization.textContent = '';
-                responseVariations.textContent = '';
-            }
-    });
-    </script> 
+    <script src="/static/js/script.js"></script>
 </body>
 </html>

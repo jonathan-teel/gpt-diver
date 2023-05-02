@@ -15,6 +15,8 @@ def generate_analysis():
     model = request.form['model']
     query = request.form['query']
     useSystem = request.form['sm']
+    temperature = float(request.form['temperature'])
+    top_p = float(request.form['top_p'])
     prompt = """Review the following input and provide the requested responses using the instructions provided for each response element. You should only respond with the JSON object with the specified format. "response" is the root JSON object. Make sure the JSON is parsable by json.loads(). You must ALWAYS respond with something in each response section. The JSON format as is follows:
     "response": {
         "answer": "Respond as you normally would as an AI chat bot",
@@ -36,12 +38,16 @@ def generate_analysis():
     try:
         response = openai.ChatCompletion.create(
             model=model,
+            temperature=temperature,
+            top_p=top_p,
             messages=[{'role': 'system', 'content': prompt}, {'role': 'user', 'content': query}] if useSystem else [{'role': 'user', 'content': prompt + query}]
         )
     except Exception as e:
         return jsonify({'error': str(e)})
 
     parsed_response = parse_response(response.choices[0].message.content.strip())
+    if(parsed_response == 'error'):
+        return jsonify({'error': 'BAD_PARSE', 'result': response.choices[0].message.content.strip()})
     answer = parsed_response['response']['answer']
     analysis = parsed_response['response']['analysis']
     interpretation = parsed_response['response']['interpretation']
@@ -66,12 +72,11 @@ def parse_response(message):
     json_start = re.search(r'\{', message).start()
     ret = message[json_start:]
     try:
-        j = json.loads(ret)
+        return json.loads(ret)
     except json.JSONDecodeError as e:
-        j = None
         print(f"JSONDecodeError: {e}")
         print(f"For Value: {message}")
-    return j
+        return 'error'
 
 if __name__ == '__main__':
     app.run(debug=True)
