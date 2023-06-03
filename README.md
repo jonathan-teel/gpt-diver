@@ -55,7 +55,7 @@ The query can be reran with a selected responsed attached as query history. The 
 
 ## Live Demo
 
-http://jonathanteel.pythonanywhere.com/
+https://gptdiver.jonathanteel.com
 
 ## Contributing
 
