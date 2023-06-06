@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var personalization = document.getElementById('personalization');
     var responseVariations = document.getElementById('response-variations');
     var runBtn = document.getElementById('runBtn');
+    var patoisBtn = document.getElementById('patoisBtn');
     var thoughtsSpinner = document.getElementById('thoughts-spinner');
     thoughtsSpinner.style.display = 'none';
     var originalQuery = '';
@@ -23,6 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
         originalQuery = document.getElementById('query').value;
         queryHistory = '';
         generateAnalysis();
+    });
+
+    patoisBtn.addEventListener('click', async (event) => {
+        generateGptPatois()
     });
 
     document.getElementById('runAnswerBtn').addEventListener('click', async (event) => {
@@ -140,6 +145,29 @@ document.addEventListener('DOMContentLoaded', () => {
         thoughtsSpinner.style.display = 'none';
         runBtn.disabled = false;
         runBtn.innerText = 'Dive In';
+    }
+
+    async function generateGptPatois() {
+        var apiKey = document.getElementById('apiKey').value;
+        var query = document.getElementById('query').value;
+        var model = document.getElementById('modelSelect').value;
+        patoisBtn.disabled = true;
+        runBtn.disabled = true;
+        var response = await fetch('/generate-patois', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: `query=${encodeURIComponent(query)}&api_key=${encodeURIComponent(apiKey)}&model=${encodeURIComponent(model)}`
+        });
+
+        var result = await response.json();
+        if (result.error) {
+            document.getElementById('query').value = "!![GPT-Diver] CONVERSION_ERROR :\n" + result.error;
+        } else {
+            document.getElementById('query').value = result.answer;
+            
+        }
+        patoisBtn.disabled = false;
+        runBtn.disabled = false;
     }
 
     async function resubmitQuery(newQuery) {
