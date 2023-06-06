@@ -2,8 +2,10 @@ from flask import Flask, render_template, request, jsonify
 import openai
 import re
 import json
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def index():
@@ -211,4 +213,4 @@ def parse_response(message):
         return 'error'
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
